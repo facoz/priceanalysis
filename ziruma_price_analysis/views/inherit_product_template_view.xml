@@ -1,0 +1,23 @@
+<odoo>
+    <record id="inherit_product_with_channel_prices_view" model="ir.ui.view">
+        <field name="name">view.product.inherit.channel.prices.form</field>
+        <field name="model">ziruma.mapp.channel.prices</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <group name="channel_price">
+                    <field name="channel_mapp_ids" widget="one2many_list" nolabel="1">
+                        <notebook>
+                            <page name="channel_price" string="Channel Prices">
+                                <tree string="Channel Prices" widget="one2many_list" editable="bottom">
+                                    <field name="channel_id"/>
+                                    <field name="price"/>
+                                </tree>
+                            </page>
+                        </notebook>
+                    </field>
+                </group> 
+            </xpath>
+        </field>
+    </record> 
+</odoo>

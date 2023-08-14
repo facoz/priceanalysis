@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="price_analysis_tree" model="ir.ui.view">
+        <field name="name">price.analysis.tree</field>
+        <field name="model">price.analysis</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sku" string="Sku"/>
+                <field name="channel"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="price_analysis_form" model="ir.ui.view">
+        <field name="name">price.analysis.form</field>
+        <field name="model">price.analysis</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="reports" save="false">
+                <header attrs="{'invisible': [('id', '=', False)]}">
+                </header>
+                <sheet>
+                   <group>
+                        <group>
+                            <field name="sku" domain="[('detailed_type', '=', 'product'), ('categ_id', '=', 2)]"/>
+                        </group>
+                        <group>
+                            <field name="units"/>
+                        </group>
+                        <group>
+                            <field name="channel"  domain="[('active', '=', True)]"/>
+                        </group>
+                        <group>
+                            <field name="country" widget="selection"/>
+                        </group>
+                   </group>
+                   <group>
+                        <group col="6">
+                            <field name="p_length" string="Length"/> 
+                            <label for="p_length" string="cm" nolabel="1" colspan="1"/>
+                        </group> 
+                        <group col="6">
+                            <field name="p_width" string="Width"/>
+                            <label for="p_width" string="cm" nolabel="1" colspan="1"/>
+                        </group>
+                        <group col="6">
+                            <field name="p_height" string="Height"/>
+                            <label for="p_height" string="cm" nolabel="1" colspan="1"/>
+                        </group>
+                        <group col="6">
+                            <field name="p_weight" string ="Weight" title="Lbs"/>
+                            <label for="p_weight" string="lbs" nolabel="1" colspan="1"/>
+                        </group>
+                        <group col="6">
+                            <field name="volume"/>
+                            <label for="volume" string="cm3" nolabel="1" colspan="1"/>
+                        </group>
+                        <group col="6">
+                            <field name="size_text"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="variation"/>
+                        </group>
+                        <group>
+                            <field name="item_cost"/>
+                        </group>
+                        <group>
+                            <field name="price"/>
+                        </group>
+                        <group>
+                            <field name="dimensional_weight"/>
+                        </group>
+                        <group>
+                            <field name="import_cost"/>
+                        </group>
+                        <group>
+                            <field name="labor"/>
+                        </group>
+                        <group>
+                            <field name="over_head"/>
+                        </group>
+                        <group>
+                            <field name="amazon_storage_fee"/>
+                        </group>
+                        <group>
+                            <field name="amazon_fba_weight_handling"/>
+                        </group>
+                        <group>
+                            <field name="amazon_fba_outbound_shiping_weight"/>
+                        </group>
+                        <group>
+                            <field name="amazon_comission"/>
+                        </group>
+                        <group>
+                            <field name="tacos"/>
+                        </group>
+                        <group>
+                            <field name="total_cost"/>
+                        </group>
+                        <group>
+                            <field name="margin"/>
+                        </group>
+                        <group>
+                            <field name="profit"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="price_analysis_view" model="ir.actions.act_window">
+        <field name="name">Ziruma Price Analysis</field>
+        <field name="res_model">price.analysis</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field> <!-- esto para ocultar el boton de save y discard -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Amazon Returns And Replacements
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="price_analysis"
+        name="Price Analysis"
+        web_icon= "ziruma_price_analysis,static/description/icon.png"
+        sequence="6"/>
+
+    <menuitem id="price_analysis_submenu"
+        name="Analysis"
+        parent="price_analysis"
+        sequence="6"/>
+
+    <menuitem id="item_submenu"
+        name="Analysis"
+        action="price_analysis_view"
+        parent="price_analysis_submenu"
+        sequence="6"/>
+
+</odoo>
